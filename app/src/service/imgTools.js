@@ -10,7 +10,7 @@ const config = {
     cropHeight: 600
 }
 
-let tempImgFolder = path.join(app.getPath('temp'), 'generator-act-temp')
+let tempImgFolder = path.join(app.getPath('temp'), 'generator-act-temp', 'images')
 let tempIndexImg = path.join(tempImgFolder, 'index.jpg')
 const ImgTools = {}
 

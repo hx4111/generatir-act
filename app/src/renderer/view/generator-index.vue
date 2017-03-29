@@ -21,24 +21,27 @@
                     <el-form-item label="可分享">
                         <el-switch on-text="" off-text="" v-model="form.actShare"></el-switch>
                     </el-form-item>
-                    <el-upload v-show="form.actShare"
-                        class="upload-demo"
-                        drag
-                        action="https://jsonplaceholder.typicode.com/posts/"
-                        mutiple>
-                        <i class="el-icon-upload"></i>
-                        <div class="el-upload__text">将分享图拖到此处，或<em>点击上传</em></div>
-                        <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
-                    </el-upload>
+                    <el-form-item>
+                        <el-upload v-show="form.actShare"
+                            class="upload-demo"
+                            drag
+                            action="https://jsonplaceholder.typicode.com/posts/"
+                            mutiple>
+                            <i class="el-icon-upload"></i>
+                            <div class="el-upload__text">将分享图拖到此处，或<em>点击上传</em></div>
+                            <div class="el-upload__tip" slot="tip">只能上传jpg/png文件，且不超过500kb</div>
+                            <br>
+                        </el-upload>
+                    </el-form-item>
+                    <el-form-item>
+                        <el-button type="primary" @click="onSubmit">立即创建</el-button>
+                        <el-button>取消</el-button>
+                    </el-form-item>
                 </el-form>
             </el-col>
 
-            <el-col :span="10" class="main-col">
-                <ViturePhone></ViturePhone>
-            </el-col>
-
-            <el-col :span="7">
-
+            <el-col :span="17" class="main-col">
+                <ViturePhone ref="viturePhone"></ViturePhone>
             </el-col>
         </el-row>
     </div>
@@ -46,6 +49,7 @@
 <script>
     
     import ViturePhone from '../components/ViturePhone.vue'
+    import { makeFile } from '../../service/templateTools.js'
 
     export default {
         data() {
@@ -62,7 +66,10 @@
         },
         methods: {
             onSubmit() {
-
+                let tplMainHtmlStr = this.$refs.viturePhone
+                tplMainHtmlStr = tplMainHtmlStr.$el.querySelector('.phone-pannel').innerHTML + ''
+                tplMainHtmlStr = tplMainHtmlStr.replace(/apptempimg\:\/\//g, 'images/')
+                makeFile(Object.assign(this.form, { tplMainHtml: tplMainHtmlStr }))
             }
         },
         components: {

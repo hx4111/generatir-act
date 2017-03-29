@@ -16,7 +16,7 @@ function createWindow () {
    */
   mainWindow = new BrowserWindow({
     height: 1000,
-    width: 1400
+    width: 1600
   })
 
   mainWindow.loadURL(winURL)
@@ -32,7 +32,7 @@ function createWindow () {
 app.on('ready', createWindow)
 
 // regist file protocol 'apptemp'
-let tempImgPath = path.join(app.getPath('temp'), 'generator-act-temp')
+let tempImgPath = path.join(app.getPath('temp'), 'generator-act-temp', 'images')
 if (fs.existsSync(tempImgPath)) {
   let dirList = fs.readdirSync(tempImgPath)
   dirList.forEach((fileName) => {
@@ -41,7 +41,7 @@ if (fs.existsSync(tempImgPath)) {
 } else {
   fs.mkdirSync(tempImgPath)
 }
-protocols.register('apptemp', protocols.basepath(tempImgPath));
+protocols.register('apptempimg', protocols.basepath(tempImgPath));
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

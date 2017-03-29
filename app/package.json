@@ -9,6 +9,7 @@
     "gm": "^1.23.0",
     "less": "^2.7.2",
     "less-loader": "^3.0.0",
+    "preprocess": "^3.1.0",
     "vue": "^2.1.10",
     "vue-electron": "^1.0.6",
     "vue-router": "^2.1.2",
