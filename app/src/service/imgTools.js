@@ -10,7 +10,21 @@ const config = {
     cropHeight: 600
 }
 
-let tempImgFolder = path.join(app.getPath('temp'), 'generator-act-temp', 'images')
+let tempImgFolder = path.join(app.getPath('temp'), 'generator-act-temp')
+if (tempImgFolder) {
+    if (!fs.existsSync(tempImgFolder)) {
+        fs.mkdirSync(tempImgFolder)
+    }
+    tempImgFolder = path.join(tempImgFolder, 'images')
+    if (fs.existsSync(tempImgFolder)) {
+        let dirList = fs.readdirSync(tempImgFolder)
+        dirList.forEach((fileName) => {
+            fs.unlinkSync(path.join(tempImgFolder, fileName))
+        })
+    } else {
+        fs.mkdirSync(tempImgFolder)
+    }
+}
 let tempIndexImg = path.join(tempImgFolder, 'index.jpg')
 const ImgTools = {}
 
@@ -28,14 +42,6 @@ let copyImg = imgPath => {
     return new Promise((resolve, reject) => {
         if (tempImgFolder) {
             let tempImgPath = tempImgFolder // 创建临时文件夹
-            if (fs.existsSync(tempImgPath)) {
-                let dirList = fs.readdirSync(tempImgPath)
-                dirList.forEach((fileName) => {
-                    fs.unlinkSync(path.join(tempImgPath, fileName))
-                })
-            } else {
-                fs.mkdirSync(tempImgPath)
-            }
             if (imgPath) {
                 console.info(path.join(tempImgPath, 'index.jpg'))
                 let fileReadStream = fs.createReadStream(imgPath)

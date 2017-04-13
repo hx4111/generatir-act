@@ -33,15 +33,7 @@ app.on('ready', createWindow)
 
 // regist file protocol 'apptemp'
 let tempImgPath = path.join(app.getPath('temp'), 'generator-act-temp', 'images')
-if (fs.existsSync(tempImgPath)) {
-  let dirList = fs.readdirSync(tempImgPath)
-  dirList.forEach((fileName) => {
-      fs.unlinkSync(path.join(tempImgPath, fileName))
-  })
-} else {
-  fs.mkdirSync(tempImgPath)
-}
-protocols.register('apptempimg', protocols.basepath(tempImgPath));
+protocols.register('apptempimg', protocols.basepath(tempImgPath))
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
