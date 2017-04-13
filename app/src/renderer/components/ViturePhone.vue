@@ -15,7 +15,7 @@
             </div>
         </el-col>  
         <!-- 控制按钮 -->
-        <el-col :span="6">
+        <!-- <el-col :span="6">
             <div class="active-btn-ctrl">
                 <el-form ref="form" :model="goBtnForm" label-width="80px">
                     <el-form-item label="x">
@@ -43,16 +43,13 @@
         </el-col>
         <el-col :span="6">
             <div class="btn-list">
-                <div class="viture-btn go" 
-                    data-ccid={{ goBtnForm.ccid }}
-                    data-epid={{ goBtnForm.epid }} 
-                    :style="{ }"
+                <div class="viture-btn go"
                     draggable="true" 
                     @dragstart="onDragStart($event, 'go')">
                     阅读漫画按钮
                 </div>
             </div>
-        </el-col>
+        </el-col> -->
     </div>
 </template>
 <script>
@@ -71,12 +68,12 @@
                     btnY: 0,
                     btnW: 100,
                     btnH: 20,
-                    epid: 0
+                    epid: 0,
+                    ccid: 0
                 },
                 goBtnStyle: {
                     width: 0, 
-                    height: goBtnForm.btnH, 
-                    transform: translate3D(goBtnForm.btnX + '%', goBtnForm.btnY + '%') 
+                    height: 20
                 }
             }
         },
